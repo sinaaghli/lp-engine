@@ -38,10 +38,14 @@ set( _LIBRARIES
 include_directories( ${_INCLUDE_DIRS} )
 
 set( HDRS
-        include/lp-engine/lp-engine.h
+        include/lp-engine/lpengine.h
+        include/lp-engine/lpproblem.h
+	include/lp-engine/lpdictionary.h
         )
 set( SRCS
-        src/lp-engine.cpp
+        src/lpengine.cpp
+	src/lpproblem.cpp
+	src/lpdictionary.cpp
         )
 
 if(BUILD_APPLICATIONS)
