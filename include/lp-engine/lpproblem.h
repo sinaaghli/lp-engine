@@ -8,10 +8,11 @@
 
 enum LPSolverType { NONE, LP_SIMPLEX_PRIMAL, LP_SIMPLEX_DUAL };
 enum LPPRoblemStatus {
-  STATUS_SOLVING,
+  STATUS_ITTERATING,
   STATUS_UNBOUNDED,
   STATUS_INFEASIBLE,
-  STATUS_OPTIMAL
+  STATUS_OPTIMAL,
+  STATUS_NONE
 };
 
 class lpproblem {
@@ -22,6 +23,8 @@ class lpproblem {
   void Set_b(Eigen::VectorXd b_vec);
   void Set_c(Eigen::VectorXd c_vec);
   bool UpdateProblem();
+  void ChangeToAuxiliary();
+  void RetrieveFromAuxiliary();
   bool Set_solver(LPSolverType solver_type);
   void PrintDictionary();
 
@@ -33,12 +36,12 @@ class lpproblem {
 
   Eigen::MatrixXd a_b_;
   Eigen::MatrixXd a_n_;
-  Eigen::VectorXd x_b_;
-  Eigen::VectorXd x_n_;
+//  Eigen::VectorXd x_b_;
+//  Eigen::VectorXd x_n_;
   Eigen::VectorXd c_b_;
   Eigen::VectorXd c_n_;
   Eigen::VectorXd b_;
-  Eigen::VectorXd z_n_;
+//  Eigen::VectorXd z_n_;
   Eigen::VectorXd x_b_hat_;
   Eigen::VectorXd z_n_hat_;
   Eigen::VectorXd delta_x_b_;
@@ -47,15 +50,21 @@ class lpproblem {
   double t_;
   // Dual Step size
   double s_;
+  // Objective function value
+  double obj_value_;
   // Latest chosen leaving variable
   int leaving_var_;
   // Latest chosen entering variable
   int entering_var_;
-  std::vector<int> basic_indices_;
-  std::vector<int> nonbasic_indices_;
+//  std::vector<int> basic_indices_;
+//  std::vector<int> nonbasic_indices_;
 
   int dim_n_;
   int dim_m_;
+
+  std::vector<int>  basic_set_;
+  std::vector<int>  nonbasic_set_;
+
 
   int dic_number_;
 };

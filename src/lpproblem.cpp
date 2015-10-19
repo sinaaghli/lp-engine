@@ -6,17 +6,34 @@ lpproblem::~lpproblem() {}
 
 void lpproblem::Set_A(Eigen::MatrixXd A_mat) {
   A_start_.resize(A_mat.rows(), A_mat.cols());
-  A_start_ << A_mat;
+  A_start_ = A_mat;
 }
 
 void lpproblem::Set_b(Eigen::VectorXd b_vec) {
   b_start_.resize(b_vec.rows());
-  b_start_ << b_vec;
+  b_start_ = b_vec;
 }
 
 void lpproblem::Set_c(Eigen::VectorXd c_vec) {
   c_start_.resize(c_vec.rows());
-  c_start_ << c_vec;
+  c_start_ = c_vec;
+}
+void lpproblem::ChangeToAuxiliary() {
+  // change objective function to -x0
+//  c_n_.resize(c_n_.rows()+1);
+//  c_n_.setZero(c_n_.rows());
+//  c_n_[c_n_.rows()-1] = -1;
+//  z_n_hat_ = -c_n_;
+//  a_n_.resize(a_n_.rows(), a_n_.cols()+1);
+//  dim_n_++;
+//  Eigen::VectorXd tmp(a_n_.rows());
+//  a_n_ << A_start_, -tmp.setOnes(tmp.rows());
+  c_n_ = -c_n_.setOnes(c_n_.rows());
+  z_n_hat_ = -c_n_;
+}
+
+void lpproblem::RetrieveFromAuxiliary() {
+
 }
 
 bool lpproblem::UpdateProblem() {
@@ -40,21 +57,22 @@ bool lpproblem::UpdateProblem() {
   b_.resize(dim_m_);
   b_ = b_start_;
   x_b_hat_.resize(dim_m_);
-  x_b_hat_.setZero(x_b_hat_.rows());
-  x_n_.resize(dim_m_);
-  x_n_.setZero(x_n_.rows());
-  x_b_.resize(dim_m_);
-  x_b_ = b_;  // this is also x_hat knowing Xn is zero
+  x_b_hat_ = b_;
+//  x_n_.resize(dim_m_);
+//  x_n_.setZero(x_n_.rows());
+//  x_b_.resize(dim_m_);
+//  x_b_ = b_;  // this is also x_hat knowing Xn is zero
   z_n_hat_.resize(dim_n_);
   z_n_hat_ = -c_n_;
-  z_n_.resize(dim_n_);
+//  z_n_.resize(dim_n_);
   delta_x_b_.resize(dim_m_);
+  delta_z_n_.resize(dim_n_);
   for (int ii = 1; ii <= dim_n_; ii++) {
-    nonbasic_indices_.push_back(ii);
+    nonbasic_set_.push_back(ii);
   }
 
-  for (int ii = dim_n_ + 1; ii <= dim_n_ + dim_m_; ii++) {
-    basic_indices_.push_back(ii);
+  for (int ii = dim_n_+1; ii <= dim_n_ + dim_m_; ii++) {
+    basic_set_.push_back(ii);
   }
 
   //  std::cout << "a-basic:\n" << a_b_ << std::endl;
@@ -67,9 +85,13 @@ bool lpproblem::UpdateProblem() {
 }
 
 void lpproblem::PrintDictionary() {
-  std::cout << "\tDic# " << dic_number_ << "\t|"
-            << "\tDic# " << dic_number_ << "\t|"
-            << std::endl;
+  std::cout << "======================== start" << std::endl;
+  std::cout << "-- Dictionary is :\n";
+  std::cout << "-----------------------------" << std::endl;
+  std::cout << "-- A : \n" << a_n_ << std::endl;
+  std::cout << "-- b : \n" << b_ << std::endl;
+  std::cout << "-- c : \n" << c_n_ << std::endl;
+  std::cout << "========================== end" << std::endl;
 }
 
 bool lpproblem::Set_solver(LPSolverType solver_type) {

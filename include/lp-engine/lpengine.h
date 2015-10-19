@@ -15,14 +15,14 @@ class lpengine{
 
  private:
   bool ReadDicSolution();
-  bool CheckDicOptimal();
-  bool CheckDicBounded();
   bool IsSemiPositive(Eigen::VectorXd& vec);
+  bool IsNegative(Eigen::VectorXd& vec);
   bool CheckDicfeasible(Eigen::VectorXd& x_b_hat);
   int ChooseEnteringVar(Eigen::VectorXd& vec);
-  int ChooseLeavingVar(Eigen::VectorXd& delta_x_b, Eigen::VectorXd& x_b_hat);
-  LPPRoblemStatus SimplexStep();
-  void SwapCols(Eigen::MatrixXd& mat1, int index_mat1, Eigen::MatrixXd& mat2, int index_mat2);
+  void ChooseLeavingVar(Eigen::VectorXd& delta_var, Eigen::VectorXd& var_hat, int* return_index, double* return_step_length);
+  LPPRoblemStatus PrimalSimplexStep();
+  LPPRoblemStatus DualSimplexStep();
+  void SwapCols(Eigen::MatrixXd& matb, int index_matb, Eigen::MatrixXd& matn, int index_matn);
   void PrintStatusMsg(LPPRoblemStatus& status);
   lpproblem p_;
 };
