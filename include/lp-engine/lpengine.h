@@ -22,7 +22,7 @@ class lpengine{
   void ChooseLeavingVar(Eigen::VectorXd& delta_var, Eigen::VectorXd& var_hat, int* return_index, double* return_step_length);
   LPPRoblemStatus PrimalSimplexStep();
   LPPRoblemStatus DualSimplexStep();
-  void SwapCols(Eigen::MatrixXd& matb, int index_matb, Eigen::MatrixXd& matn, int index_matn);
+  void SwapCols(Eigen::MatrixXd& matn, int index_matn, Eigen::MatrixXd& matb, int index_matb);
   void PrintStatusMsg(LPPRoblemStatus& status);
   lpproblem p_;
 };

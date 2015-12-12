@@ -19,15 +19,6 @@ void lpproblem::Set_c(Eigen::VectorXd c_vec) {
   c_start_ = c_vec;
 }
 void lpproblem::ChangeToAuxiliary() {
-  // change objective function to -x0
-//  c_n_.resize(c_n_.rows()+1);
-//  c_n_.setZero(c_n_.rows());
-//  c_n_[c_n_.rows()-1] = -1;
-//  z_n_hat_ = -c_n_;
-//  a_n_.resize(a_n_.rows(), a_n_.cols()+1);
-//  dim_n_++;
-//  Eigen::VectorXd tmp(a_n_.rows());
-//  a_n_ << A_start_, -tmp.setOnes(tmp.rows());
   c_n_ = -c_n_.setOnes(c_n_.rows());
   z_n_hat_ = -c_n_;
 }
