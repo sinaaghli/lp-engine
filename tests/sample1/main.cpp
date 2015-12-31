@@ -98,11 +98,11 @@ int main() {
   problem_cycling.UpdateProblem();
 
   // Enable the requred problem to be solved in the following lines
-//  lpengine my_engine(problem_Pfeasible);
+  lpengine my_engine(problem_Pfeasible);
 //  lpengine my_engine(problem_Pfeasible2);
 //  lpengine my_engine(problem_Dfeasible);
 //  lpengine my_engine(problem_infeasible);
-  lpengine my_engine(problem_cycling);
+//  lpengine my_engine(problem_cycling);
 
   my_engine.Solve();
 
