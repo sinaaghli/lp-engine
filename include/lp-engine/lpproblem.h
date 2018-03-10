@@ -1,7 +1,7 @@
 #ifndef LPPROBLEM_H_
 #define LPPROBLEM_H_
 
-#include <Eigen/Eigen>
+#include <eigen3/Eigen/Eigen>
 #include <iostream>
 #include <vector>
 #include <lp-engine/lpdictionary.h>

@@ -1,7 +1,7 @@
 #ifndef LPDICTIONARY_H_
 #define LPDICTIONARY_H_
 
-#include <Eigen/Eigen>
+#include <eigen3/Eigen/Eigen>
 
 class dictionary{
  public:

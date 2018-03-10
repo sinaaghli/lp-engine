@@ -32,7 +32,7 @@ set( _INCLUDE_DIRS
         ${CMAKE_CURRENT_SOURCE_DIR}/include
         )
 set( _LIBRARIES
-        ${EIGEN3_LIBRARIES}
+#        ${EIGEN3_LIBRARIES}
         )
 
 include_directories( ${_INCLUDE_DIRS} )
@@ -63,7 +63,7 @@ install_package(
   LIB_NAME ${LIBRARY_NAME}
   VERSION ${VERSION}
   DESCRIPTION "LP problem solver"
-  #INSTALL_INCLUDE_DIR true
+  INSTALL_INCLUDE_DIR true
   DESTINATION ${CMAKE_INSTALL_PREFIX}
   INCLUDE_DIRS ${_INCLUDE_DIRS}
   LINK_LIBS ${_LIBRARIES}

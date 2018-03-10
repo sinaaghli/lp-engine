@@ -2,7 +2,7 @@
 #define LP_ENGINE_H_
 
 #include <iostream>
-#include <Eigen/Eigen>
+#include <eigen3/Eigen/Eigen>
 #include <lp-engine/lpproblem.h>
 #include <cstddef>
 
@@ -24,7 +24,7 @@ class lpengine{
   LPPRoblemStatus DualSimplexStep();
   void SwapCols(Eigen::MatrixXd& matn, int index_matn, Eigen::MatrixXd& matb, int index_matb);
   void PrintStatusMsg(LPPRoblemStatus& status);
-  lpproblem p_;
+  lpproblem& p_;
 };
 
 #endif  // LP_ENGINE_H_
